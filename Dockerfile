@@ -1,7 +1,14 @@
-FROM golang:alpine
-ENV GOPATH /go/src/app
+FROM golang:1.10
 
-RUN mkdir $GOPATH
-ADD . $GOPATH
-WORKDIR $GOPATH
+# ENV GOPATH /go/src/app
+
+RUN mkdir -p /go/src/app
+ADD . /go/src/app
+WORKDIR /go/src/app
+
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    go get -u github.com/golang/dep/cmd/dep && \
+    dep ensure
+
 EXPOSE 8080

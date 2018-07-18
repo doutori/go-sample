@@ -4,5 +4,8 @@ services:
     build: .
     container_name: app
     tty: true
+    volumes:
+      - ".:/go/src/app"
+      - "/go/src/app/vendor"
     ports:
       - "8080:8080"
