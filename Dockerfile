@@ -1,0 +1,7 @@
+FROM golang:alpine
+ENV GOPATH /go/src/app
+
+RUN mkdir $GOPATH
+ADD . $GOPATH
+WORKDIR $GOPATH
+EXPOSE 8080
