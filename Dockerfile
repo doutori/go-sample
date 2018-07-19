@@ -12,3 +12,5 @@ RUN apt-get update && \
     dep ensure
 
 EXPOSE 8080
+
+CMD go run server.go
