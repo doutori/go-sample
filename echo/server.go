@@ -18,23 +18,19 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 	return t.templates.ExecuteTemplate(w, name, data)
 }
 
-// Sample Handler ...
-func Sample(c echo.Context) error {
-	return c.Render(http.StatusOK, "sample", "Sampleでぇす!!!!")
-}
-
 func main() {
 	t := &Template{
 		templates: template.Must(template.ParseGlob("views/*.html")),
 	}
 
 	e := echo.New()
+	e.Static("/assets", "assets")
 	e.Renderer = t
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
 
-	e.GET("/sample", Sample)
+	// Routing
+	e.GET("/", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "index", nil)
+	})
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
