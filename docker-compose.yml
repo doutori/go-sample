@@ -9,3 +9,11 @@ services:
       - "/go/src/app/vendor"
     ports:
       - "8080:8080"
+  chi:
+    build: chi
+    container_name: chi
+    volumes:
+      - ".:/go/src/app"
+      - "/go/src/app/vendor"
+    ports:
+      - "8081:8081"
