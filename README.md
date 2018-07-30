@@ -3,6 +3,7 @@
 ## Framework
 
 * [echo](https://echo.labstack.com/)
+* [chi](https://github.com/go-chi/chi)
 
 ## Dependencies
 
