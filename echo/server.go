@@ -8,9 +8,15 @@ import (
 	"github.com/labstack/echo"
 )
 
-// Template ...
+// Template of Structure
 type Template struct {
 	templates *template.Template
+}
+
+// Member of Structure
+type Member struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
 }
 
 // Render ...
@@ -30,6 +36,15 @@ func main() {
 	// Routing
 	e.GET("/", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "index", nil)
+	})
+
+	e.GET("/members", func(c echo.Context) error {
+		members := []Member{
+			{ID: 1, Name: "name1"},
+			{ID: 2, Name: "name2"},
+		}
+
+		return c.JSON(http.StatusOK, members)
 	})
 
 	e.Logger.Fatal(e.Start(":8080"))
