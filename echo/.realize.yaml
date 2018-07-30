@@ -2,6 +2,10 @@ settings:
   legacy:
     force: false
     interval: 0s
+server:
+  status: true
+  host: localhost
+  port: 8080
 schema:
 - name: echo
   path: .
