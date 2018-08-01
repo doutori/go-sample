@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"log"
 	"net/http"
@@ -10,7 +11,7 @@ import (
 	"github.com/go-chi/render"
 )
 
-var routes = flag.Bool("routes", false, "Generate router documentation")
+// var routes = flag.Bool("routes", false, "Generate router documentation")
 
 func main() {
 	flag.Parse()
@@ -34,4 +35,22 @@ func main() {
 	log.Println("Starting app")
 
 	http.ListenAndServe(":8081", r)
+}
+
+// Member of type
+type Member struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
+}
+
+// MemberIndex ...
+func MemberIndex(w http.ResponseWriter, r *http.Request) {
+	members := []Member{
+		{ID: 1, Name: "name1"},
+		{ID: 2, Name: "name2"},
+	}
+
+	if err := json.NewEncoder(w).Encode(members); err != nil {
+		panic(err)
+	}
 }
