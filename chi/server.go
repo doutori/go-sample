@@ -1,10 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"log"
 	"net/http"
+
+	"../handler"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
@@ -29,28 +30,10 @@ func main() {
 	})
 
 	r.Route("/members", func(r chi.Router) {
-		r.Get("/", MemberIndex)
+		r.Get("/", handler.MemberIndex)
 	})
 
 	log.Println("Starting app")
 
 	http.ListenAndServe(":8081", r)
-}
-
-// Member of type
-type Member struct {
-	ID   int    `json:"id"`
-	Name string `json:"name"`
-}
-
-// MemberIndex ...
-func MemberIndex(w http.ResponseWriter, r *http.Request) {
-	members := []Member{
-		{ID: 1, Name: "name1"},
-		{ID: 2, Name: "name2"},
-	}
-
-	if err := json.NewEncoder(w).Encode(members); err != nil {
-		panic(err)
-	}
 }
