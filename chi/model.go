@@ -1,4 +1,4 @@
-package model
+package main
 
 // Member of type
 type Member struct {
