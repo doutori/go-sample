@@ -1,15 +1,31 @@
 package main
 
-import "testing"
+import (
+	"testing"
+
+	. "github.com/franela/goblin"
+)
 
 func TestExampleSuccess(t *testing.T) {
-	result, err := example("hoge")
-	if err != nil {
-		t.Fatalf("failed test %#v", err)
-	}
-	if result != 1 {
-		t.Fatal("failed test")
-	}
+	// Goblin を利用した書き方
+	g := Goblin(t)
+	result, _ := example("hoge")
+
+	g.Describe("Numbers", func() {
+		g.It("result should be 1", func() {
+			g.Assert(result).Equal(1)
+		})
+	})
+
+	// testing のネイティブの書き方
+	// result, err := example("hoge")
+	//
+	// if err != nil {
+	// 	t.Fatalf("failed test %#v", err)
+	// }
+	// if result != 1 {
+	// 	t.Fatal("failed test")
+	// }
 }
 
 func TestExampleFailed(t *testing.T) {
