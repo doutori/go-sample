@@ -28,7 +28,7 @@ func main() {
 	})
 
 	r.Route("/members", func(r chi.Router) {
-		r.Get("/", handler.MemberIndex)
+		r.Get("/", MemberIndex)
 	})
 
 	log.Println("Starting app")
